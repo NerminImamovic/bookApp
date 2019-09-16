@@ -1,0 +1,335 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Short coding assesmet where is needed to implement a REST API that calls an external API service to get information about books and with REST API crud to save information about books in local database. ",
+    "version": "1.0.0",
+    "title": "Adeva Interview"
+  },
+  "host": "localhost:8000/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/external-books": {
+      "get": {
+        "tags": [
+          "external-books"
+        ],
+        "summary": "Get ExternalBooks",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/books": {
+      "post": {
+        "tags": [
+          "books"
+        ],
+        "summary": "Add new book into library.",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "books"
+        ],
+        "summary": "Get All Books",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Book"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/books/{bookId}": {
+      "get": {
+        "tags": [
+          "books"
+        ],
+        "summary": "Get book by ID",
+        "description": "Returns a single book",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "ID of book to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "books"
+        ],
+        "summary": "Update a book in the store with form data",
+        "description": "",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "ID of book to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Updated name of the book",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "isbn",
+            "in": "formData",
+            "description": "Updated name of the book",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "publisher",
+            "in": "formData",
+            "description": "Updated name of the book",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "in": "formData",
+            "description": "Updated name of the book",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "release_date",
+            "in": "formData",
+            "description": "Updated name of the book",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "authors",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "description": "authors."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Book"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "books"
+        ],
+        "summary": "Delete a book",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "ID of book to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Sucsess"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      }
+    },
+    "/v1/books/{bookId}/delete": {
+      "delete": {
+        "tags": [
+          "books"
+        ],
+        "summary": "Delete a book",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "description": "ID of book to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Sucsess"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Book not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Book": {
+      "type": "object",
+      "required": [
+        "name",
+        "isbn",
+        "authors",
+        "number_of_pages",
+        "publisher",
+        "country",
+        "release_date"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "My First Book"
+        },
+        "isbn": {
+          "type": "string",
+          "example": "23-3213243567"
+        },
+        "publisher": {
+          "type": "string",
+          "example": "Acme Books"
+        },
+        "country": {
+          "type": "string",
+          "example": "United States"
+        },
+        "number_of_pages": {
+          "type": "number",
+          "example": 250
+        },
+        "release_date": {
+          "type": "string",
+          "example": "2019-08-01"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "John Doe"
+          }
+        }
+      }
+    }
+  }
+}
