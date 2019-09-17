@@ -2,6 +2,11 @@ const _ = require('lodash');
 
 const BookService = require('../services').bookService;
 module.exports = {
+    /**
+     * Add book.
+     * @param req Request
+     * @param res Response
+     */
     async addBook (req, res) {
 
         const data = {
@@ -14,19 +19,21 @@ module.exports = {
             authors: JSON.stringify(req.body.authors),
         };
 
-        console.log("Data " + JSON.stringify(data));
-
         try {
             const book = await BookService.addBook(data);
 
-            res.status(201).send(book);            
+            res.status(201).send(book);
+
         } catch (error) {
-
-            console.log("Error " + JSON.stringify(error));
-
+            
             res.status(400).send(error);
         }
     },
+    /**
+     * Get all books.
+     * @param req Request
+     * @param res Response
+     */
     async getAllBooks(req, res) {
 
         try {
@@ -35,11 +42,14 @@ module.exports = {
             res.status(200).send(books);
         } catch (error) {
 
-            console.log("Errors " + error);
-
             res.status(400).send(error);
         }
     },
+    /**
+     * Get book by Id.
+     * @param req Request
+     * @param res Response
+     */
     async getBookById(req, res) {
 
         const bookId = req.param('bookId');
@@ -47,23 +57,30 @@ module.exports = {
         try {
             const book = await BookService.getBookById(bookId);
 
-            res.status(200).send(book);
+
+            if (book) {
+                res.status(200).send(book);
+            } else {
+                res.status(404).send(); 
+            }
+
         } catch (error) {
 
             res.status(400).send(error);
         }
     },
+    /**
+     * Delete book.
+     * @param req Request
+     * @param res Response
+     */
     async deleteBook(req, res) {
-        console.log("Req param " + req.param('bookId'));
 
         const bookId = req.param('bookId');
 
         try {
 
             const isDeleted = await BookService.deleteBook(bookId);
-
-
-            console.log("Ovdje " + isDeleted);
 
             if (isDeleted) {
                 res.status(204).send();
@@ -73,12 +90,14 @@ module.exports = {
 
         } catch (error) {
 
-            console.log("Error " + JSON.stringify(error));
-
             res.status(400).send(error);
         }
-
     },
+    /**
+     * Update Book.
+     * @param req Request
+     * @param res Response
+     */
     async updateBook(req, res, next) {
 
         const bookId = req.param('bookId');
@@ -96,21 +115,10 @@ module.exports = {
             
             const isUpdated = await BookService.updateBook(bookId, data);
 
-            console.log("IsUpdated " + isUpdated);
-
             if (isUpdated == 0) { 
 
-                console.log("OOOVdje ");
-
                 res.status(404).send();
-                // next(); 
 
-                // try {
-
-
-                // } catch(error) {
-                //     res.status(404).send();
-                // }
             } else {
 
                 const book = await BookService.getBookById(bookId);
@@ -118,13 +126,8 @@ module.exports = {
                 res.status(200).send(book); 
 
             }
-           
-            
-
         } catch (error) {
             
-            console.log("Error " + error);
-
             res.status(400).send(error);
         }
 

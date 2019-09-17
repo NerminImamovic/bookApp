@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "title": "Adeva Interview"
   },
-  "host": "localhost:8000/api",
+  "host": "localhost:8080/api",
   "schemes": [
     "http"
   ],
@@ -33,13 +33,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "schema": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Book"
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -61,7 +64,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Pet object that needs to be added to the store",
+            "description": "Book object that needs to be added to the store",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Book"
@@ -75,8 +78,8 @@
               "$ref": "#/definitions/Book"
             }
           },
-          "405": {
-            "description": "Invalid input"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -94,7 +97,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Success",
             "schema": {
               "type": "array",
               "items": {
@@ -136,7 +139,7 @@
             "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "Pet not found"
+            "description": "Book not found"
           }
         }
       },

@@ -2,6 +2,11 @@ const _ = require('lodash');
 
 const Book = require('../models').Book;
 module.exports = {
+    /**
+     * Add book.
+     * @param data
+     * @return book 
+     */
     addBook (data) {
 
         return Book
@@ -15,11 +20,13 @@ module.exports = {
             })
             .catch((error) => {
 
-                console.log("Error " + error);
-
                 throw error;
             });
     },
+    /**
+     * Get All books.
+     * @return books
+     */
     getAllBooks() {
         return Book
             .findAll()
@@ -37,11 +44,19 @@ module.exports = {
                 throw error;
             });
     },
+    /**
+     * Get Book by Id.
+     * @param bookId 
+     * @return book
+     */
     getBookById(bookId) {
         return Book
             .findByPk(bookId)
             .then(book => {
-            
+
+                if (!book)
+                    return null;
+
                 const returnBook = book;
                 returnBook.authors = JSON.parse(book.authors);
 
@@ -51,6 +66,11 @@ module.exports = {
                 throw error;
             });
     },
+    /**
+     * Delete Book
+     * @param bookId 
+     * @return boolean
+     */
     deleteBook(bookId) {
         return Book.destroy({ where: { id: bookId } })
             .then((result) => { 
@@ -61,8 +81,13 @@ module.exports = {
                 throw error;
             });
     },
+    /**
+     * Update book
+     * @param bookId 
+     * @param data
+     * @return boolean
+     */
     updateBook(bookId, data) {
-
 
         const query = {
             id: bookId

@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 const bookService = require('../../src/services/bookService');
 
-describe('BookController methods', () => {
+describe("BookController", () => {
 
     let books = [
         {
@@ -19,7 +19,7 @@ describe('BookController methods', () => {
             number_of_pages: 250,
             release_date: "2019-08-01",
             authors: [
-              "John Doe"
+                "John Doe"
             ]
         },
     ]
@@ -32,14 +32,15 @@ describe('BookController methods', () => {
         number_of_pages: 250,
         release_date: "2019-08-01",
         authors: [
-          "John Doe"
+            "John Doe"
         ]
     };
 
     const bookServiceMock = sinon.mock(bookService);
-    
+
     beforeEach(() => {
         bookServiceMock.expects('getAllBooks').returns([]);
+        bookServiceMock.expects('addBook').returns(body);
         bookServiceMock.expects('getBookById').returns(books[0]);
         bookServiceMock.expects('deleteBook').returns(true);
         bookServiceMock.expects('updateBook').returns(true);
@@ -91,7 +92,6 @@ describe('BookController methods', () => {
         .delete('/api/v1/books/1')
         .end((err, res) => {
             res.should.have.status(204);
-            res.body.should.be.a('object');
             done();
         });
     });
@@ -101,11 +101,8 @@ describe('BookController methods', () => {
         .delete('/api/v1/books/1')
         .end((err, res) => {
             res.should.have.status(204);
-            res.body.should.be.a('object');
             done();
         });
     });
-
-
 
 });

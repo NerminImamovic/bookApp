@@ -2,10 +2,13 @@ const _ = require('lodash');
 
 const externalBookService = require('../services').externalBookService;
 module.exports = {
+    /**
+     * Get books.
+     * @param req Request
+     * @param res Response
+     */
     async getBooks(req, res) {
-
-        // console.log(req.query.name);
-
+        
         const name = req.query.name;
 
         try {

@@ -3,9 +3,7 @@ const _ = require('lodash');
 
 module.exports = {
     async getBooks(name) {
-
-        console.log("Name " + name);
-
+        
         try {
 
             const { data: result } = await axios.get(`https://www.anapioficeandfire.com/api/books?name=${name}`);
@@ -25,7 +23,7 @@ module.exports = {
             return books;
         
         } catch(error) {
-            console.log("Error " + error);
+            throw error;
         }
     }
 };
