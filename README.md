@@ -25,10 +25,10 @@ Short coding assignment, where we implemented a REST API that calls an external 
 
 ## Scripts
 
-# start
-# migrate
-# migrate-down
-# test
+* start
+* migrate
+* migrate-down
+* test
 
 ## Installation
 
