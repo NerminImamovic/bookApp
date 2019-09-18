@@ -4,24 +4,24 @@ Short coding assignment, where we implemented a REST API that calls an external 
 
 ## Dependencies
 
-# axios
-# body-parser
-# cors"
-# express
-# lodash
-# mysql2
-# sequelize
-# sinon
-# swagger-ui-express
+* axios
+* body-parser
+* cors
+* express
+* lodash
+* mysql2
+* sequelize
+* sinon
+* swagger-ui-express
 
 ## DevDependencies
 
-# chai
-# chai-http
-# mocha
-# nock
-# sequelize-cli
-# sequelize-test-helpers
+* chai
+* chai-http
+* mocha
+* nock
+* sequelize-cli
+* sequelize-test-helpers
 
 ## Scripts
 
