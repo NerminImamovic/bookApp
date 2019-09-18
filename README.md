@@ -2,6 +2,34 @@
 
 Short coding assignment, where we implemented a REST API that calls an external API service to get information about books. Also, we implemented a simple CRUD (Create, Read, Update, Delete) API connecting **mysql** local database.
 
+## Dependencies
+
+# axios
+# body-parser
+# cors"
+# express
+# lodash
+# mysql2
+# sequelize
+# sinon
+# swagger-ui-express
+
+## DevDependencies
+
+# chai
+# chai-http
+# mocha
+# nock
+# sequelize-cli
+# sequelize-test-helpers
+
+## Scripts
+
+# start
+# migrate
+# migrate-down
+# test
+
 ## Installation
 
 We assume that user has **node.js**, **npm* and **mysql** installed.
@@ -69,7 +97,7 @@ After installation and project setup, we can use it.
 To use application we should run the script:
 
 ```bash
-npm run build
+npm run start
 ```
 
 On the http://127.0.0.1:8080/api-docs/ we have **SWAGGER UI** with all our requests and responses with their content.

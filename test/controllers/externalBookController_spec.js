@@ -2,13 +2,9 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const nock = require('nock');
 const app = require('../../src/app');
-const sinon = require('sinon');
-const should = chai.should();
 chai.use(chaiHttp);
 
-const bookService = require('../../src/services/bookService');
-
-describe.only("externalBookController", () => {
+describe("externalBookController", () => {
 
     let result =  [
         {
